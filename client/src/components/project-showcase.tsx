@@ -257,6 +257,17 @@ export default function ProjectShowcase() {
                       <Button
                         size="sm"
                         className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-colors h-6 px-3 text-xs"
+                        onClick={() => {
+                          const links: Record<string, string> = {
+                            'crypto-dashboard': 'https://www.behance.net/gallery/195305239/Crypto-Vision-UI-Dashboard-Design',
+                            'saas-landing': 'https://www.steveroseik.com/projects/web-saas-platform',
+                            'ai-platform': 'https://neuralai.mt/'
+                          };
+                          const link = links[project.id];
+                          if (link) {
+                            window.open(link, '_blank');
+                          }
+                        }}
                       >
                         <ExternalLink className="w-3 h-3 mr-1" />
                         View
