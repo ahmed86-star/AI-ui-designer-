@@ -32,6 +32,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Key Components
 
+### Real-time Collaboration
+- **WebSocket Integration**: Live real-time communication using WebSocket server on `/ws` path
+- **Room Management**: Create and join collaborative rooms with unique IDs and participant tracking
+- **Live Cursors**: Real-time cursor tracking with user colors and 5-second timeout for inactive cursors
+- **Synchronized Prompts**: Shared prompt editing with real-time updates across all participants
+- **Collaborative Generation**: Shared UI generation with live status updates and result broadcasting
+- **Participant Management**: Live participant list with color-coded badges and connection status
+- **Auto-reconnection**: Automatic WebSocket reconnection with exponential backoff for reliability
+- **Room Sharing**: Copy room IDs and share links for easy collaboration access
+- **Multi-user Support**: Handle multiple users per room with proper cleanup and connection management
+
 ### API Documentation
 - **Comprehensive API Guide**: Multi-tabbed interface covering all major LLM providers
 - **Provider Coverage**: OpenAI (GPT-4o, GPT-4 Turbo), Anthropic (Claude 3), Google (Gemini), Mistral, and open-source models
@@ -53,7 +64,7 @@ Preferred communication style: Simple, everyday language.
 - **Output**: Clean HTML with Tailwind CSS classes, no JavaScript
 
 ### UI Designer Interface
-- **Navigation**: Professional navigation bar with AI UI Designer branding and route switching (Home, API Guide, About)
+- **Navigation**: Professional navigation bar with AI UI Designer branding and route switching (Home, API Guide, Collaborate, About)
 - **Input Panel**: 4-tab interface with Showcase (default), Gallery, Quick Templates, and Modern sections
 - **The Showcase Tab**: Professional project showcase featuring amazing AI-built projects with:
   - **Visual UI Previews**: Real HTML/CSS mockups of dashboards, landing pages, and apps
@@ -75,6 +86,7 @@ Preferred communication style: Simple, everyday language.
 - **Code Export**: HTML download, React component export, and copy functionality
 - **API Guide**: Comprehensive LLM API documentation page with provider setup, code examples, and best practices
 - **About Page**: Professional creator profile featuring Abdirahman Ahmed's background as Cloud Engineer & ML/AI Student
+- **Collaborative Mode**: Real-time collaborative design with WebSocket support, room management, live cursors, and synchronized UI generation
 
 ### Component System
 - **Design System**: shadcn/ui components with consistent dark theme

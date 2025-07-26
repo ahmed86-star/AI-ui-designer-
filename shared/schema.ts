@@ -61,3 +61,130 @@ export const generateUIResponseSchema = z.object({
 });
 
 export type GenerateUIResponse = z.infer<typeof generateUIResponseSchema>;
+
+// Collaborative design schemas
+export const collaborativeRooms = pgTable("collaborative_rooms", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  currentPrompt: text("current_prompt").default(""),
+  currentHtml: text("current_html").default(""),
+  model: text("model").notNull().default("gpt-4o"),
+  createdAt: timestamp("created_at").defaultNow(),
+  lastActivity: timestamp("last_activity").defaultNow(),
+  participants: json("participants").default([]),
+});
+
+export const insertRoomSchema = createInsertSchema(collaborativeRooms).pick({
+  name: true,
+  currentPrompt: true,
+  currentHtml: true,
+  model: true,
+});
+
+export type InsertRoom = z.infer<typeof insertRoomSchema>;
+export type CollaborativeRoom = typeof collaborativeRooms.$inferSelect;
+
+// WebSocket message schemas
+export const collaborativeMessageSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("join"),
+    roomId: z.string(),
+    userId: z.string(),
+    username: z.string(),
+  }),
+  z.object({
+    type: z.literal("leave"),
+    roomId: z.string(),
+    userId: z.string(),
+  }),
+  z.object({
+    type: z.literal("prompt_change"),
+    roomId: z.string(),
+    userId: z.string(),
+    prompt: z.string(),
+  }),
+  z.object({
+    type: z.literal("generate"),
+    roomId: z.string(),
+    userId: z.string(),
+    prompt: z.string(),
+    model: z.string(),
+  }),
+  z.object({
+    type: z.literal("cursor_move"),
+    roomId: z.string(),
+    userId: z.string(),
+    position: z.object({
+      x: z.number(),
+      y: z.number(),
+    }),
+  }),
+]);
+
+export type CollaborativeMessage = z.infer<typeof collaborativeMessageSchema>;
+
+export const collaborativeEventSchema = z.discriminatedUnion("type", [
+  z.object({
+    type: z.literal("user_joined"),
+    roomId: z.string(),
+    user: z.object({
+      id: z.string(),
+      username: z.string(),
+      color: z.string(),
+    }),
+    participants: z.array(z.object({
+      id: z.string(),
+      username: z.string(),
+      color: z.string(),
+    })),
+  }),
+  z.object({
+    type: z.literal("user_left"),
+    roomId: z.string(),
+    userId: z.string(),
+    participants: z.array(z.object({
+      id: z.string(),
+      username: z.string(),
+      color: z.string(),
+    })),
+  }),
+  z.object({
+    type: z.literal("prompt_updated"),
+    roomId: z.string(),
+    prompt: z.string(),
+    userId: z.string(),
+    username: z.string(),
+  }),
+  z.object({
+    type: z.literal("generation_started"),
+    roomId: z.string(),
+    userId: z.string(),
+    username: z.string(),
+    prompt: z.string(),
+    model: z.string(),
+  }),
+  z.object({
+    type: z.literal("generation_completed"),
+    roomId: z.string(),
+    html: z.string(),
+    generationId: z.string(),
+  }),
+  z.object({
+    type: z.literal("generation_error"),
+    roomId: z.string(),
+    error: z.string(),
+  }),
+  z.object({
+    type: z.literal("cursor_position"),
+    roomId: z.string(),
+    userId: z.string(),
+    username: z.string(),
+    color: z.string(),
+    position: z.object({
+      x: z.number(),
+      y: z.number(),
+    }),
+  }),
+]);
+
+export type CollaborativeEvent = z.infer<typeof collaborativeEventSchema>;

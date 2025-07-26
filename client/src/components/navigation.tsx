@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
-import { Home, Book, Code, Sparkles, User } from "lucide-react";
+import { Home, Book, Code, Sparkles, User, Users } from "lucide-react";
 
 export default function Navigation() {
   const [location] = useLocation();
@@ -17,6 +17,12 @@ export default function Navigation() {
       label: "API Guide",
       icon: Book,
       description: "LLM API documentation"
+    },
+    {
+      path: "/collaborate",
+      label: "Collaborate",
+      icon: Users,
+      description: "Real-time collaboration"
     },
     {
       path: "/about",
