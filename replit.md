@@ -33,16 +33,19 @@ Preferred communication style: Simple, everyday language.
 ## Key Components
 
 ### AI Integration
-- **Provider**: OpenAI API integration via official SDK
-- **Models**: Support for GPT-4o (default) and GPT-3.5-turbo
+- **Multi-Provider Support**: OpenAI, Anthropic Claude, and xAI Grok models
+- **OpenAI Models**: GPT-4o (default) and GPT-3.5-turbo
+- **Anthropic Models**: Claude Sonnet 4.0 and Claude 3.7 Sonnet
+- **xAI Models**: Grok 2.0 and Grok 2.0 Vision
 - **Prompt Engineering**: Specialized system prompts for HTML/Tailwind generation
 - **Output**: Clean HTML with Tailwind CSS classes, no JavaScript
 
 ### UI Designer Interface
-- **Input Panel**: Prompt textarea, model selection, responsive toggle, template shortcuts
+- **Input Panel**: Prompt textarea, multi-AI model selection, responsive toggle, extensive template library
+- **Template Library**: 10+ pre-built templates including Landing Page, Dashboard, Blog, E-commerce, Portfolio, Restaurant, Fitness, Startup, Social Media, and Education
 - **Preview Panel**: Live HTML preview with responsive breakpoint testing (desktop/tablet/mobile)
-- **Settings Modal**: API key configuration, default preferences, auto-save options
-- **Code Export**: HTML download and copy functionality
+- **Settings Modal**: Multi-provider API key configuration, default preferences, auto-save options
+- **Code Export**: HTML download, React component export, and copy functionality
 
 ### Component System
 - **Design System**: shadcn/ui components with consistent dark theme
@@ -65,6 +68,8 @@ Preferred communication style: Simple, everyday language.
 - **drizzle-orm**: Type-safe SQL query builder and ORM
 - **@tanstack/react-query**: Server state management and caching
 - **openai**: Official OpenAI API client
+- **@anthropic-ai/sdk**: Official Anthropic Claude API client
+- **xAI integration**: Grok models via OpenAI-compatible API
 
 ### UI Dependencies
 - **@radix-ui/***: Headless UI primitives for accessibility
@@ -88,7 +93,7 @@ Preferred communication style: Simple, everyday language.
 - **Development**: Uses tsx for TypeScript execution with hot reload
 - **Production**: Compiled JavaScript execution with Express static serving
 - **Database**: Requires `DATABASE_URL` environment variable
-- **API Keys**: Requires `OPENAI_API_KEY` environment variable
+- **API Keys**: Supports `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, and `XAI_API_KEY` environment variables
 
 ### Deployment Requirements
 - Node.js runtime environment

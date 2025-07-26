@@ -36,7 +36,14 @@ export type InsertGeneration = z.infer<typeof insertGenerationSchema>;
 // API request/response schemas
 export const generateUISchema = z.object({
   prompt: z.string().min(10, "Prompt must be at least 10 characters"),
-  model: z.enum(["gpt-4o", "gpt-3.5-turbo"]).default("gpt-4o"),
+  model: z.enum([
+    "gpt-4o", 
+    "gpt-3.5-turbo", 
+    "claude-sonnet-4-20250514", 
+    "claude-3-7-sonnet-20250219",
+    "grok-2-1212",
+    "grok-2-vision-1212"
+  ]).default("gpt-4o"),
   responsive: z.boolean().default(true),
 });
 

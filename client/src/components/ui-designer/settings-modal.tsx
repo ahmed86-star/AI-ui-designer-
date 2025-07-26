@@ -14,7 +14,7 @@ interface SettingsModalProps {
 
 export default function SettingsModal({ open, onOpenChange }: SettingsModalProps) {
   const [apiKey, setApiKey] = useState("");
-  const [defaultModel, setDefaultModel] = useState<"gpt-4o" | "gpt-3.5-turbo">("gpt-4o");
+  const [defaultModel, setDefaultModel] = useState<"gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212">("gpt-4o");
   const [autoSave, setAutoSave] = useState(true);
   const [darkMode, setDarkMode] = useState(true);
   const { toast } = useToast();
@@ -94,13 +94,17 @@ export default function SettingsModal({ open, onOpenChange }: SettingsModalProps
             <Label className="block text-sm font-medium text-slate-300 mb-2">
               Default Model
             </Label>
-            <Select value={defaultModel} onValueChange={(value: "gpt-4o" | "gpt-3.5-turbo") => setDefaultModel(value)}>
+            <Select value={defaultModel} onValueChange={(value: "gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212") => setDefaultModel(value)}>
               <SelectTrigger className="bg-dev-bg border-dev-border text-slate-50">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-dev-surface border-dev-border">
-                <SelectItem value="gpt-4o">GPT-4o (Recommended)</SelectItem>
-                <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo (Faster)</SelectItem>
+                <SelectItem value="gpt-4o">GPT-4o (OpenAI)</SelectItem>
+                <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo (OpenAI)</SelectItem>
+                <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet (Anthropic)</SelectItem>
+                <SelectItem value="claude-3-7-sonnet-20250219">Claude 3.7 Sonnet (Anthropic)</SelectItem>
+                <SelectItem value="grok-2-1212">Grok 2.0 (xAI)</SelectItem>
+                <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision (xAI)</SelectItem>
               </SelectContent>
             </Select>
           </div>

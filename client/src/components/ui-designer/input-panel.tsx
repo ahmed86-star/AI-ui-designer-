@@ -20,12 +20,18 @@ const templates = {
   landing: "Create a modern landing page for a SaaS product with a hero section featuring a headline, subtitle, and call-to-action button. Include a features section with 3 columns and a pricing section.",
   dashboard: "Design a clean dashboard interface with a sidebar navigation containing menu items like Dashboard, Analytics, Users, and Settings. Include a main content area with stat cards and a data table.",
   blog: "Create a blog homepage with a header containing navigation and logo, a featured post section, and a grid of recent blog posts with thumbnail images, titles, and excerpts.",
-  ecommerce: "Design an e-commerce product page with a large product image gallery on the left and product details on the right including title, price, description, and add to cart button."
+  ecommerce: "Design an e-commerce product page with a large product image gallery on the left and product details on the right including title, price, description, and add to cart button.",
+  portfolio: "Create a personal portfolio website with a hero section featuring name and profession, an about section, skills showcase with progress bars, and a project gallery with hover effects.",
+  restaurant: "Design a restaurant website with a header featuring the restaurant name and navigation, hero section with food imagery, menu section with categories, and contact information with location map.",
+  fitness: "Create a fitness gym website with a bold hero section promoting memberships, class schedule section, trainer profiles with photos, and membership pricing plans.",
+  startup: "Design a modern startup website with animated hero section, problem-solution sections, team member cards, investor logos, and a newsletter signup form.",
+  social: "Create a social media app interface with a news feed layout, post cards with user avatars, like and comment buttons, trending topics sidebar, and user profile sections.",
+  education: "Design an online learning platform with course cards, instructor profiles, progress tracking elements, video player interface, and student dashboard layout."
 };
 
 export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }: InputPanelProps) {
   const [prompt, setPrompt] = useState("");
-  const [model, setModel] = useState<"gpt-4o" | "gpt-3.5-turbo">("gpt-4o");
+  const [model, setModel] = useState<"gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212">("gpt-4o");
   const [responsive, setResponsive] = useState(true);
   const { toast } = useToast();
 
@@ -117,7 +123,7 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
           <Lightbulb className="w-4 h-4 text-yellow-500" />
           <span className="text-sm font-medium text-slate-300">Quick Templates</span>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -154,6 +160,60 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
           >
             E-commerce
           </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => useTemplate("portfolio")}
+            disabled={isGenerating}
+            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
+          >
+            Portfolio
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => useTemplate("restaurant")}
+            disabled={isGenerating}
+            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
+          >
+            Restaurant
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => useTemplate("fitness")}
+            disabled={isGenerating}
+            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
+          >
+            Fitness
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => useTemplate("startup")}
+            disabled={isGenerating}
+            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
+          >
+            Startup
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => useTemplate("social")}
+            disabled={isGenerating}
+            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
+          >
+            Social Media
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => useTemplate("education")}
+            disabled={isGenerating}
+            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
+          >
+            Education
+          </Button>
         </div>
       </div>
 
@@ -180,13 +240,17 @@ Examples:
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <Label className="text-sm text-slate-300">Model:</Label>
-              <Select value={model} onValueChange={(value: "gpt-4o" | "gpt-3.5-turbo") => setModel(value)} disabled={isGenerating}>
-                <SelectTrigger className="w-32 bg-dev-bg border-dev-border text-slate-50">
+              <Select value={model} onValueChange={(value: "gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212") => setModel(value)} disabled={isGenerating}>
+                <SelectTrigger className="w-48 bg-dev-bg border-dev-border text-slate-50">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="gpt-4o">GPT-4o</SelectItem>
                   <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
+                  <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet</SelectItem>
+                  <SelectItem value="claude-3-7-sonnet-20250219">Claude 3.7 Sonnet</SelectItem>
+                  <SelectItem value="grok-2-1212">Grok 2.0</SelectItem>
+                  <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision</SelectItem>
                 </SelectContent>
               </Select>
             </div>
