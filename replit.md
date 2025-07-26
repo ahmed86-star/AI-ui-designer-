@@ -53,7 +53,7 @@ Preferred communication style: Simple, everyday language.
 - **Output**: Clean HTML with Tailwind CSS classes, no JavaScript
 
 ### UI Designer Interface
-- **Navigation**: Professional navigation bar with AI UI Designer branding and route switching
+- **Navigation**: Professional navigation bar with AI UI Designer branding and route switching (Home, API Guide, About)
 - **Input Panel**: 4-tab interface with Showcase (default), Gallery, Quick Templates, and Modern sections
 - **The Showcase Tab**: Professional project showcase featuring amazing AI-built projects with:
   - **Visual UI Previews**: Real HTML/CSS mockups of dashboards, landing pages, and apps
@@ -74,6 +74,7 @@ Preferred communication style: Simple, everyday language.
 - **Preview Panel**: Live HTML preview with responsive breakpoint testing (desktop/tablet/mobile)
 - **Code Export**: HTML download, React component export, and copy functionality
 - **API Guide**: Comprehensive LLM API documentation page with provider setup, code examples, and best practices
+- **About Page**: Professional creator profile featuring Abdirahman Ahmed's background as Cloud Engineer & ML/AI Student
 
 ### Component System
 - **Design System**: shadcn/ui components with consistent dark theme
