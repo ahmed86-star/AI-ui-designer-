@@ -1,6 +1,6 @@
 # 🎨 AI UI Designer
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/ai-ui-designer)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/ahmed86-star/AI-ui-designer-)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB)](https://reactjs.org/)
@@ -107,8 +107,8 @@ Vercel Serverless
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/yourusername/ai-ui-designer.git
-cd ai-ui-designer
+git clone https://github.com/ahmed86-star/AI-ui-designer-.git
+cd AI-ui-designer-
 npm install
 ```
 
@@ -446,10 +446,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support & Contact
 
-- **GitHub Issues**: [Report bugs or request features](https://github.com/yourusername/ai-ui-designer/issues)
-- **Discussions**: [Community discussions](https://github.com/yourusername/ai-ui-designer/discussions)
+- **GitHub Issues**: [Report bugs or request features](https://github.com/ahmed86-star/AI-ui-designer-/issues)
+- **Discussions**: [Community discussions](https://github.com/ahmed86-star/AI-ui-designer-/discussions)
 - **Documentation**: [Full documentation](https://ai-ui-designer.vercel.app/docs)
-- **Creator**: [Abdirahman Ahmed](https://github.com/yourusername) - Cloud Engineer & ML/AI Student
+- **Creator**: [Abdirahman Ahmed](https://github.com/ahmed86-star) - Cloud Engineer & ML/AI Student
 
 ---
 

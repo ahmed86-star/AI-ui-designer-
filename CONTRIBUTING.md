@@ -25,8 +25,8 @@ We use GitHub to host code, track issues and feature requests, and accept pull r
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/ai-ui-designer.git
-cd ai-ui-designer
+git clone https://github.com/ahmed86-star/AI-ui-designer-.git
+cd AI-ui-designer-
 
 # Install dependencies
 npm install
@@ -91,7 +91,7 @@ Types:
 
 ## Reporting Bugs
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/yourusername/ai-ui-designer/issues).
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/ahmed86-star/AI-ui-designer-/issues).
 
 **Great Bug Reports** tend to have:
 
