@@ -6,27 +6,27 @@ export default function TrustSection() {
   const stats = [
     {
       icon: Users,
-      value: "50,000+",
+      value: "30+",
       label: "Developers",
-      description: "Trust our platform"
+      description: "Building with AI"
     },
     {
       icon: Zap,
-      value: "1M+",
+      value: "150+",
       label: "UI Components",
       description: "Generated successfully"
     },
     {
       icon: Star,
-      value: "4.9/5",
+      value: "4.8/5",
       label: "Rating",
-      description: "From user reviews"
+      description: "From early users"
     },
     {
       icon: TrendingUp,
-      value: "99.9%",
-      label: "Uptime",
-      description: "Reliable service"
+      value: "Growing",
+      label: "Community",
+      description: "Join us early"
     }
   ];
 

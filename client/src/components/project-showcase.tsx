@@ -36,7 +36,7 @@ const showcaseProjects: ShowcaseProject[] = [
         </div>
       </div>
     `,
-    views: "12.4k",
+    views: "147",
     rating: 4.9,
     tags: ["Dashboard", "Crypto", "Charts"],
     featured: true,
@@ -57,7 +57,7 @@ const showcaseProjects: ShowcaseProject[] = [
         </div>
       </div>
     `,
-    views: "8.2k",
+    views: "89",
     rating: 4.8,
     tags: ["SaaS", "Landing", "Glassmorphism"],
     featured: true,
@@ -80,7 +80,7 @@ const showcaseProjects: ShowcaseProject[] = [
         </div>
       </div>
     `,
-    views: "15.7k",
+    views: "203",
     rating: 4.9,
     tags: ["AI", "Analytics", "ML"],
     featured: true,
@@ -101,7 +101,7 @@ const showcaseProjects: ShowcaseProject[] = [
         </div>
       </div>
     `,
-    views: "9.8k",
+    views: "76",
     rating: 4.7,
     tags: ["E-commerce", "Fashion", "Shopping"],
     featured: false,
@@ -125,7 +125,7 @@ const showcaseProjects: ShowcaseProject[] = [
         </div>
       </div>
     `,
-    views: "18.3k",
+    views: "124",
     rating: 4.8,
     tags: ["Social", "Creators", "Streaming"],
     featured: false,
@@ -146,7 +146,7 @@ const showcaseProjects: ShowcaseProject[] = [
         <div class="bg-blue-500 text-white text-xs p-2 rounded">Dr. Smith - 2:00 PM</div>
       </div>
     `,
-    views: "6.4k",
+    views: "52",
     rating: 4.6,
     tags: ["Healthcare", "Telemedicine", "Portal"],
     featured: false,
@@ -176,15 +176,15 @@ export default function ProjectShowcase() {
         <div className="flex items-center justify-center space-x-6 text-sm text-slate-400">
           <div className="flex items-center space-x-1">
             <Eye className="w-4 h-4" />
-            <span>200k+ total views</span>
+            <span>2.8k total views</span>
           </div>
           <div className="flex items-center space-x-1">
             <Heart className="w-4 h-4" />
-            <span>15k+ likes</span>
+            <span>150+ likes</span>
           </div>
           <div className="flex items-center space-x-1">
             <Code className="w-4 h-4" />
-            <span>500+ projects</span>
+            <span>30+ projects</span>
           </div>
         </div>
       </div>
