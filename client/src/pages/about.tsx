@@ -8,8 +8,7 @@ import {
   Code, 
   Sparkles, 
   Github, 
-  Linkedin, 
-  Mail,
+  Globe,
   GraduationCap,
   Lightbulb,
   Zap,
@@ -86,17 +85,21 @@ export default function About() {
                   professional-quality interfaces accessible through natural language.
                 </p>
                 <div className="flex space-x-3">
-                  <Button variant="outline" className="glass border-slate-600/50">
+                  <Button 
+                    variant="outline" 
+                    className="glass border-slate-600/50"
+                    onClick={() => window.open('https://github.com/ahmed86-star', '_blank')}
+                  >
                     <Github className="w-4 h-4 mr-2" />
                     GitHub
                   </Button>
-                  <Button variant="outline" className="glass border-slate-600/50">
-                    <Linkedin className="w-4 h-4 mr-2" />
-                    LinkedIn
-                  </Button>
-                  <Button variant="outline" className="glass border-slate-600/50">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Contact
+                  <Button 
+                    variant="outline" 
+                    className="glass border-slate-600/50"
+                    onClick={() => window.open('https://ahmed-dev1.com/', '_blank')}
+                  >
+                    <Globe className="w-4 h-4 mr-2" />
+                    Website
                   </Button>
                 </div>
               </div>
