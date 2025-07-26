@@ -116,18 +116,23 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
   };
 
   return (
-    <div className="flex flex-col lg:w-1/2 border-r border-dev-border bg-dev-surface">
-      {/* Input Header */}
-      <div className="flex items-center justify-between p-4 border-b border-dev-border">
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6 border-b border-slate-700/50">
         <div className="flex items-center space-x-3">
-          <Edit3 className="w-5 h-5 text-dev-accent" />
-          <h2 className="font-semibold text-slate-50">Describe Your UI</h2>
+          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center animate-glow">
+            <Edit3 className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <h2 className="font-semibold text-slate-50">Describe Your UI</h2>
+            <p className="text-xs text-slate-400">Transform ideas into stunning interfaces</p>
+          </div>
         </div>
         
         <div className="flex items-center space-x-2">
           {isGenerating && (
-            <div className="flex items-center space-x-2 text-sm text-slate-400">
-              <Loader2 className="w-4 h-4 animate-spin" />
+            <div className="flex items-center space-x-2 text-sm text-slate-300 glass rounded-full px-3 py-1">
+              <Loader2 className="w-4 h-4 animate-spin text-purple-400" />
               <span>Generating...</span>
             </div>
           )}
@@ -137,7 +142,7 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
             size="sm"
             onClick={clearPrompt}
             disabled={isGenerating}
-            className="p-2 hover:bg-dev-border"
+            className="glass hover:bg-slate-700/30 transition-all duration-300"
           >
             <Trash2 className="w-4 h-4 text-slate-400" />
           </Button>
@@ -145,14 +150,14 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
       </div>
 
       {/* Templates Section */}
-      <div className="border-b border-dev-border">
-        <Tabs defaultValue="quick" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 bg-dev-border">
-            <TabsTrigger value="quick" className="flex items-center space-x-2 data-[state=active]:bg-dev-accent">
+      <div className="border-b border-slate-700/50">
+        <Tabs defaultValue="showcase" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 glass border-slate-600/50">
+            <TabsTrigger value="quick" className="flex items-center space-x-2 data-[state=active]:bg-slate-700/50 transition-all duration-300">
               <Lightbulb className="w-3 h-3" />
               <span className="text-xs">Quick</span>
             </TabsTrigger>
-            <TabsTrigger value="showcase" className="flex items-center space-x-2 data-[state=active]:bg-purple-500">
+            <TabsTrigger value="showcase" className="flex items-center space-x-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 transition-all duration-300">
               <Sparkles className="w-3 h-3" />
               <span className="text-xs">Modern</span>
             </TabsTrigger>
@@ -329,7 +334,7 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
           
           <TabsContent value="showcase" className="p-4 mt-0">
             <TemplateShowcase 
-              onSelectTemplate={useTemplate} 
+              onSelectTemplate={(template) => useTemplate(template as keyof typeof templates)} 
               isGenerating={isGenerating} 
             />
           </TabsContent>
@@ -337,13 +342,14 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
       </div>
 
       {/* Prompt Input Area */}
-      <div className="flex-1 p-4">
-        <Textarea
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          disabled={isGenerating}
-          className="w-full h-full bg-dev-bg border-dev-border text-slate-50 placeholder-slate-400 resize-none focus:ring-dev-accent focus:border-dev-accent"
-          placeholder="Describe the UI you want to create...
+      <div className="flex-1 p-6">
+        <div className="h-full glass rounded-xl border border-slate-600/30 overflow-hidden">
+          <Textarea
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            disabled={isGenerating}
+            className="w-full h-full bg-transparent border-0 text-slate-50 placeholder-slate-400 resize-none focus:ring-0 focus:outline-none p-4"
+            placeholder="Describe the UI you want to create...
 
 🎨 Modern Examples:
 • A futuristic dashboard with neon accents and glowing data visualizations
@@ -353,68 +359,76 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
 • A crypto platform with real-time price tickers and animated balance cards
 
 ✨ Include motion keywords: animated, hover effects, transitions, parallax, glassmorphism, gradients, floating, pulsing, glowing"
-        />
+          />
+        </div>
       </div>
 
       {/* Generate Controls */}
-      <div className="p-4 border-t border-dev-border bg-dev-surface">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <Label className="text-sm text-slate-300">Model:</Label>
+      <div className="p-6 border-t border-slate-700/50 glass">
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label className="text-sm text-slate-300 font-medium">AI Model</Label>
               <Select value={model} onValueChange={(value: "gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212") => setModel(value)} disabled={isGenerating}>
-                <SelectTrigger className="w-48 bg-dev-bg border-dev-border text-slate-50">
+                <SelectTrigger className="glass border-slate-600/50 text-slate-50 bg-transparent">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="gpt-4o">GPT-4o</SelectItem>
+                <SelectContent className="glass border-slate-600/50">
+                  <SelectItem value="gpt-4o">GPT-4o ⚡</SelectItem>
                   <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
-                  <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet</SelectItem>
+                  <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet 🧠</SelectItem>
                   <SelectItem value="claude-3-7-sonnet-20250219">Claude 3.7 Sonnet</SelectItem>
-                  <SelectItem value="grok-2-1212">Grok 2.0</SelectItem>
-                  <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision</SelectItem>
+                  <SelectItem value="grok-2-1212">Grok 2.0 🤖</SelectItem>
+                  <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision 👁️</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="responsive"
-                checked={responsive}
-                onCheckedChange={(checked) => setResponsive(checked as boolean)}
-                disabled={isGenerating}
-                className="border-dev-border data-[state=checked]:bg-dev-accent"
-              />
-              <Label htmlFor="responsive" className="text-sm text-slate-300">Responsive</Label>
+            <div className="space-y-2">
+              <Label className="text-sm text-slate-300 font-medium">Settings</Label>
+              <div className="flex items-center space-x-3 h-10">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="responsive"
+                    checked={responsive}
+                    onCheckedChange={(checked) => setResponsive(checked as boolean)}
+                    disabled={isGenerating}
+                    className="border-slate-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
+                  />
+                  <Label htmlFor="responsive" className="text-sm text-slate-300">Responsive</Label>
+                </div>
+                <div className="text-xs text-slate-400 ml-auto">
+                  {prompt.length}/2000
+                </div>
+              </div>
             </div>
           </div>
           
-          <div className="text-xs text-slate-400">
-            {prompt.length} / 2000 chars
+          <Button
+            onClick={handleGenerate}
+            disabled={isGenerating || prompt.trim().length < 10}
+            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-slate-600 disabled:to-slate-600 disabled:cursor-not-allowed text-white font-medium py-3 shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+          >
+            {isGenerating ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <Wand2 className="w-4 h-4 mr-2" />
+                Generate UI
+              </>
+            )}
+          </Button>
+          
+          <div className="flex items-center justify-between text-xs text-slate-400">
+            <span className="flex items-center space-x-1">
+              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+              <span>AI Powered</span>
+            </span>
+            <span>~3-5 seconds</span>
           </div>
-        </div>
-        
-        <Button
-          onClick={handleGenerate}
-          disabled={isGenerating || prompt.trim().length < 10}
-          className="w-full bg-dev-accent hover:bg-blue-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white font-medium"
-        >
-          {isGenerating ? (
-            <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Generating...
-            </>
-          ) : (
-            <>
-              <Wand2 className="w-4 h-4 mr-2" />
-              Generate UI
-            </>
-          )}
-        </Button>
-        
-        <div className="flex items-center justify-between mt-3 text-xs text-slate-400">
-          <span>⚡ Powered by OpenAI</span>
-          <span>~3-5 seconds</span>
         </div>
       </div>
     </div>

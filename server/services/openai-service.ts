@@ -123,7 +123,7 @@ Make it visually appealing, modern, and follow current web design best practices
     else if (model.startsWith("grok-")) {
       // xAI Grok models
       if (!process.env.XAI_API_KEY) {
-        throw new Error("xAI API key not configured");
+        throw new Error("xAI API key not configured. Please provide XAI_API_KEY in environment variables or use OpenAI/Claude models instead.");
       }
       
       const response = await grokClient.chat.completions.create({

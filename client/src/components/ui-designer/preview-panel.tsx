@@ -147,17 +147,23 @@ ${jsxContent.split('\n').map(line => '      ' + line).join('\n')}
   };
 
   return (
-    <div className="flex flex-col lg:w-1/2 bg-dev-bg">
-      {/* Preview Header */}
-      <div className="flex items-center justify-between p-4 border-b border-dev-border bg-dev-surface">
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="flex items-center justify-between p-6 border-b border-slate-700/50">
         <div className="flex items-center space-x-3">
-          <Eye className="w-5 h-5 text-dev-success" />
-          <h2 className="font-semibold text-slate-50">Live Preview</h2>
-          {lastGenerated && (
-            <span className="text-xs text-slate-400">
-              Generated {formatTime(lastGenerated)}
-            </span>
-          )}
+          <div className="w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center animate-glow">
+            <Eye className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <h2 className="font-semibold text-slate-50">Live Preview</h2>
+            {lastGenerated ? (
+              <p className="text-xs text-slate-400">
+                Generated {formatTime(lastGenerated)}
+              </p>
+            ) : (
+              <p className="text-xs text-slate-400">Real-time interface preview</p>
+            )}
+          </div>
         </div>
         
         <div className="flex items-center space-x-2">
