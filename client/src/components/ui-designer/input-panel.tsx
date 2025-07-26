@@ -11,6 +11,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { Edit3, Lightbulb, Trash2, Wand2, Loader2, Sparkles, Palette } from "lucide-react";
 import TemplateShowcase from "./template-showcase";
 import ShowcaseGallery from "./showcase-gallery";
+import ProjectShowcase from "../project-showcase";
 import type { GenerateUIRequest, GenerateUIResponse } from "@shared/schema";
 
 interface InputPanelProps {
@@ -59,7 +60,7 @@ const templates = {
 
 export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }: InputPanelProps) {
   const [prompt, setPrompt] = useState("");
-  const [model, setModel] = useState<"gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212">("gpt-4o");
+  const [model, setModel] = useState<"gpt-4o" | "gpt-4-turbo" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-5-sonnet" | "claude-3-opus" | "claude-3-haiku" | "gemini-1.5-pro" | "gemini-1.5-flash" | "gemini-2.0" | "gemini-2.5-flash" | "grok-2-1212" | "grok-2-vision-1212" | "grok-1" | "command-r" | "command-r-plus">("gpt-4o");
   const [responsive, setResponsive] = useState(true);
   const { toast } = useToast();
 
@@ -152,9 +153,13 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
 
       {/* Templates Section */}
       <div className="border-b border-slate-700/50">
-        <Tabs defaultValue="gallery" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 glass border-slate-600/50">
-            <TabsTrigger value="gallery" className="flex items-center space-x-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 transition-all duration-300">
+        <Tabs defaultValue="showcase" className="w-full">
+          <TabsList className="grid w-full grid-cols-4 glass border-slate-600/50">
+            <TabsTrigger value="showcase" className="flex items-center space-x-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 transition-all duration-300">
+              <Sparkles className="w-3 h-3" />
+              <span className="text-xs">Showcase</span>
+            </TabsTrigger>
+            <TabsTrigger value="gallery" className="flex items-center space-x-1 data-[state=active]:bg-slate-700/50 transition-all duration-300">
               <Palette className="w-3 h-3" />
               <span className="text-xs">Gallery</span>
             </TabsTrigger>
@@ -162,11 +167,15 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
               <Lightbulb className="w-3 h-3" />
               <span className="text-xs">Quick</span>
             </TabsTrigger>
-            <TabsTrigger value="showcase" className="flex items-center space-x-1 data-[state=active]:bg-slate-700/50 transition-all duration-300">
-              <Sparkles className="w-3 h-3" />
+            <TabsTrigger value="modern" className="flex items-center space-x-1 data-[state=active]:bg-slate-700/50 transition-all duration-300">
+              <Wand2 className="w-3 h-3" />
               <span className="text-xs">Modern</span>
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="showcase" className="p-4 mt-0 max-h-80 overflow-y-auto">
+            <ProjectShowcase />
+          </TabsContent>
           
           <TabsContent value="gallery" className="p-4 mt-0 max-h-80 overflow-y-auto">
             <ShowcaseGallery 
@@ -344,7 +353,7 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
         </div>
           </TabsContent>
           
-          <TabsContent value="showcase" className="p-4 mt-0">
+          <TabsContent value="modern" className="p-4 mt-0">
             <TemplateShowcase 
               onSelectTemplate={(template) => useTemplate(template as keyof typeof templates)} 
               isGenerating={isGenerating} 
@@ -381,7 +390,7 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm text-slate-300 font-medium">AI Model</Label>
-              <Select value={model} onValueChange={setModel} disabled={isGenerating}>
+              <Select value={model} onValueChange={(value) => setModel(value as any)} disabled={isGenerating}>
                 <SelectTrigger className="glass border-slate-600/50 text-slate-50 bg-transparent">
                   <SelectValue />
                 </SelectTrigger>
