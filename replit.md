@@ -1,0 +1,103 @@
+# AI UI Designer
+
+## Overview
+
+This is a full-stack web application that generates HTML/CSS user interfaces from natural language descriptions using OpenAI's GPT models. Users can describe a UI in plain English, and the application generates a live, previewable webpage styled with Tailwind CSS.
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite for development and production builds
+- **UI Library**: Radix UI components with shadcn/ui styling system
+- **Styling**: Tailwind CSS with custom dark theme variables
+- **State Management**: React hooks with TanStack Query for server state
+- **Routing**: Wouter for lightweight client-side routing
+
+### Backend Architecture
+- **Runtime**: Node.js with Express.js server
+- **Language**: TypeScript with ES modules
+- **API Design**: RESTful endpoints with JSON responses
+- **Development**: Hot module replacement via Vite integration in development mode
+
+### Data Storage Solutions
+- **Primary Storage**: In-memory storage (MemStorage class) for development
+- **Database Ready**: Drizzle ORM configured for PostgreSQL with Neon Database
+- **Schema**: User management and generation history tracking
+- **Migration Support**: Drizzle Kit for schema migrations
+
+## Key Components
+
+### AI Integration
+- **Provider**: OpenAI API integration via official SDK
+- **Models**: Support for GPT-4o (default) and GPT-3.5-turbo
+- **Prompt Engineering**: Specialized system prompts for HTML/Tailwind generation
+- **Output**: Clean HTML with Tailwind CSS classes, no JavaScript
+
+### UI Designer Interface
+- **Input Panel**: Prompt textarea, model selection, responsive toggle, template shortcuts
+- **Preview Panel**: Live HTML preview with responsive breakpoint testing (desktop/tablet/mobile)
+- **Settings Modal**: API key configuration, default preferences, auto-save options
+- **Code Export**: HTML download and copy functionality
+
+### Component System
+- **Design System**: shadcn/ui components with consistent dark theme
+- **Responsive Design**: Mobile-first approach with breakpoint-specific styling
+- **Accessibility**: ARIA labels, keyboard navigation, screen reader support
+
+## Data Flow
+
+1. **User Input**: User enters UI description in input panel
+2. **API Request**: Frontend sends prompt to `/api/generate` endpoint
+3. **AI Processing**: Backend calls OpenAI API with specialized prompts
+4. **Response Handling**: Generated HTML returned and stored in memory
+5. **Live Preview**: HTML rendered in iframe with Tailwind CSS
+6. **Export Options**: Users can copy code or download as HTML file
+
+## External Dependencies
+
+### Core Dependencies
+- **@neondatabase/serverless**: PostgreSQL database connectivity
+- **drizzle-orm**: Type-safe SQL query builder and ORM
+- **@tanstack/react-query**: Server state management and caching
+- **openai**: Official OpenAI API client
+
+### UI Dependencies
+- **@radix-ui/***: Headless UI primitives for accessibility
+- **tailwindcss**: Utility-first CSS framework
+- **lucide-react**: Icon library with consistent design
+- **wouter**: Minimalist routing library
+
+### Development Dependencies
+- **vite**: Fast build tool with HMR support
+- **typescript**: Type checking and development experience
+- **@replit/vite-plugin-***: Replit-specific development tools
+
+## Deployment Strategy
+
+### Build Process
+- **Frontend**: Vite builds React app to `dist/public`
+- **Backend**: esbuild bundles server code to `dist/index.js`
+- **Assets**: Static files served from build output directory
+
+### Environment Configuration
+- **Development**: Uses tsx for TypeScript execution with hot reload
+- **Production**: Compiled JavaScript execution with Express static serving
+- **Database**: Requires `DATABASE_URL` environment variable
+- **API Keys**: Requires `OPENAI_API_KEY` environment variable
+
+### Deployment Requirements
+- Node.js runtime environment
+- PostgreSQL database (configured but not required for basic functionality)
+- OpenAI API access for AI generation features
+- Environment variables for database and API credentials
+
+### Scaling Considerations
+- Stateless server design enables horizontal scaling
+- In-memory storage should be replaced with persistent database for production
+- Rate limiting and API key management needed for multi-user scenarios
+- Consider caching generated HTML to reduce API costs
