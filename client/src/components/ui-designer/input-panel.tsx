@@ -119,35 +119,64 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b border-slate-700/50">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center animate-glow">
-            <Edit3 className="w-4 h-4 text-white" />
+      {/* Header with Generate Button */}
+      <div className="p-6 border-b border-slate-700/50 space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center animate-glow">
+              <Edit3 className="w-4 h-4 text-white" />
+            </div>
+            <div>
+              <h2 className="font-semibold text-slate-50">Describe Your UI</h2>
+              <p className="text-xs text-slate-400">Transform ideas into stunning interfaces</p>
+            </div>
           </div>
-          <div>
-            <h2 className="font-semibold text-slate-50">Describe Your UI</h2>
-            <p className="text-xs text-slate-400">Transform ideas into stunning interfaces</p>
+          
+          <div className="flex items-center space-x-2">
+            {isGenerating && (
+              <div className="flex items-center space-x-2 text-sm text-slate-300 glass rounded-full px-3 py-1">
+                <Loader2 className="w-4 h-4 animate-spin text-purple-400" />
+                <span>Generating...</span>
+              </div>
+            )}
+            
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearPrompt}
+              disabled={isGenerating}
+              className="glass hover:bg-slate-700/30 transition-all duration-300"
+            >
+              <Trash2 className="w-4 h-4 text-slate-400" />
+            </Button>
           </div>
         </div>
-        
-        <div className="flex items-center space-x-2">
-          {isGenerating && (
-            <div className="flex items-center space-x-2 text-sm text-slate-300 glass rounded-full px-3 py-1">
-              <Loader2 className="w-4 h-4 animate-spin text-purple-400" />
-              <span>Generating...</span>
-            </div>
+
+        {/* Generate UI Button */}
+        <Button
+          onClick={handleGenerate}
+          disabled={isGenerating || prompt.trim().length < 10}
+          className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-slate-600 disabled:to-slate-600 disabled:cursor-not-allowed text-white font-medium py-3 shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
+        >
+          {isGenerating ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              Generating...
+            </>
+          ) : (
+            <>
+              <Wand2 className="w-4 h-4 mr-2" />
+              Generate UI
+            </>
           )}
-          
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={clearPrompt}
-            disabled={isGenerating}
-            className="glass hover:bg-slate-700/30 transition-all duration-300"
-          >
-            <Trash2 className="w-4 h-4 text-slate-400" />
-          </Button>
+        </Button>
+        
+        <div className="flex items-center justify-between text-xs text-slate-400">
+          <span className="flex items-center space-x-1">
+            <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+            <span>AI Powered</span>
+          </span>
+          <span>~3-5 seconds</span>
         </div>
       </div>
 
@@ -384,90 +413,62 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
         </div>
       </div>
 
-      {/* Generate Controls */}
+      {/* Settings Controls */}
       <div className="p-6 border-t border-slate-700/50 glass">
-        <div className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label className="text-sm text-slate-300 font-medium">AI Model</Label>
-              <Select value={model} onValueChange={(value) => setModel(value as any)} disabled={isGenerating}>
-                <SelectTrigger className="glass border-slate-600/50 text-slate-50 bg-transparent">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="glass border-slate-600/50 max-h-64 overflow-y-auto">
-                  {/* OpenAI Models */}
-                  <SelectItem value="gpt-4o">GPT-4o ⚡ (Multimodal)</SelectItem>
-                  <SelectItem value="gpt-4-turbo">GPT-4 Turbo 🚀</SelectItem>
-                  <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
-                  
-                  {/* Anthropic Models */}
-                  <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet 🧠</SelectItem>
-                  <SelectItem value="claude-3-5-sonnet">Claude 3.5 Sonnet ⭐</SelectItem>
-                  <SelectItem value="claude-3-opus">Claude 3 Opus 💎</SelectItem>
-                  <SelectItem value="claude-3-haiku">Claude 3 Haiku ⚡</SelectItem>
-                  
-                  {/* Google Models */}
-                  <SelectItem value="gemini-1.5-pro">Gemini 1.5 Pro 🌟</SelectItem>
-                  <SelectItem value="gemini-1.5-flash">Gemini 1.5 Flash ⚡</SelectItem>
-                  <SelectItem value="gemini-2.0">Gemini 2.0 🔥</SelectItem>
-                  <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash 🚀</SelectItem>
-                  
-                  {/* xAI Models */}
-                  <SelectItem value="grok-2-1212">Grok 2.0 🤖</SelectItem>
-                  <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision 👁️</SelectItem>
-                  <SelectItem value="grok-1">Grok 1 (Open) 🌐</SelectItem>
-                  
-                  {/* Cohere Models */}
-                  <SelectItem value="command-r">Command-R 🎯</SelectItem>
-                  <SelectItem value="command-r-plus">Command-R+ ⭐</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="space-y-2">
-              <Label className="text-sm text-slate-300 font-medium">Settings</Label>
-              <div className="flex items-center space-x-3 h-10">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="responsive"
-                    checked={responsive}
-                    onCheckedChange={(checked) => setResponsive(checked as boolean)}
-                    disabled={isGenerating}
-                    className="border-slate-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
-                  />
-                  <Label htmlFor="responsive" className="text-sm text-slate-300">Responsive</Label>
-                </div>
-                <div className="text-xs text-slate-400 ml-auto">
-                  {prompt.length}/2000
-                </div>
-              </div>
-            </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label className="text-sm text-slate-300 font-medium">AI Model</Label>
+            <Select value={model} onValueChange={(value) => setModel(value as any)} disabled={isGenerating}>
+              <SelectTrigger className="glass border-slate-600/50 text-slate-50 bg-transparent">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="glass border-slate-600/50 max-h-64 overflow-y-auto">
+                {/* OpenAI Models */}
+                <SelectItem value="gpt-4o">GPT-4o ⚡ (Multimodal)</SelectItem>
+                <SelectItem value="gpt-4-turbo">GPT-4 Turbo 🚀</SelectItem>
+                <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
+                
+                {/* Anthropic Models */}
+                <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet 🧠</SelectItem>
+                <SelectItem value="claude-3-5-sonnet">Claude 3.5 Sonnet ⭐</SelectItem>
+                <SelectItem value="claude-3-opus">Claude 3 Opus 💎</SelectItem>
+                <SelectItem value="claude-3-haiku">Claude 3 Haiku ⚡</SelectItem>
+                
+                {/* Google Models */}
+                <SelectItem value="gemini-1.5-pro">Gemini 1.5 Pro 🌟</SelectItem>
+                <SelectItem value="gemini-1.5-flash">Gemini 1.5 Flash ⚡</SelectItem>
+                <SelectItem value="gemini-2.0">Gemini 2.0 🔥</SelectItem>
+                <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash 🚀</SelectItem>
+                
+                {/* xAI Models */}
+                <SelectItem value="grok-2-1212">Grok 2.0 🤖</SelectItem>
+                <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision 👁️</SelectItem>
+                <SelectItem value="grok-1">Grok 1 (Open) 🌐</SelectItem>
+                
+                {/* Cohere Models */}
+                <SelectItem value="command-r">Command-R 🎯</SelectItem>
+                <SelectItem value="command-r-plus">Command-R+ ⭐</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           
-          <Button
-            onClick={handleGenerate}
-            disabled={isGenerating || prompt.trim().length < 10}
-            className="w-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-slate-600 disabled:to-slate-600 disabled:cursor-not-allowed text-white font-medium py-3 shadow-lg hover:shadow-purple-500/25 transition-all duration-300"
-          >
-            {isGenerating ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Generating...
-              </>
-            ) : (
-              <>
-                <Wand2 className="w-4 h-4 mr-2" />
-                Generate UI
-              </>
-            )}
-          </Button>
-          
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span className="flex items-center space-x-1">
-              <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
-              <span>AI Powered</span>
-            </span>
-            <span>~3-5 seconds</span>
+          <div className="space-y-2">
+            <Label className="text-sm text-slate-300 font-medium">Settings</Label>
+            <div className="flex items-center space-x-3 h-10">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="responsive"
+                  checked={responsive}
+                  onCheckedChange={(checked) => setResponsive(checked as boolean)}
+                  disabled={isGenerating}
+                  className="border-slate-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"
+                />
+                <Label htmlFor="responsive" className="text-sm text-slate-300">Responsive</Label>
+              </div>
+              <div className="text-xs text-slate-400 ml-auto">
+                {prompt.length}/2000
+              </div>
+            </div>
           </div>
         </div>
       </div>
