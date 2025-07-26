@@ -35,20 +35,29 @@ export default function Navigation() {
   return (
     <>
       {/* Trust Banner */}
-      <div className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-b border-green-500/20 py-2">
+      <div className="bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-green-500/10 border-b border-purple-500/20 py-3">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-4 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                <span className="text-green-300 font-medium">30+ developers trust us</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-1">
+              <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+              <span className="text-purple-300 font-medium text-sm">More projects dropping soon</span>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="hidden md:block text-center">
+                <p className="text-sm text-slate-300">
+                  Join thousands of developers creating amazing UIs with AI.
+                </p>
+                <p className="text-xs text-slate-400">
+                  Your project could be featured next!
+                </p>
               </div>
-              <div className="w-px h-3 bg-slate-600"></div>
-              <span className="text-blue-300">2.8k views</span>
-              <div className="w-px h-3 bg-slate-600"></div>
-              <span className="text-purple-300">150+ likes</span>
-              <div className="w-px h-3 bg-slate-600"></div>
-              <span className="text-yellow-300">30+ projects</span>
+              
+              <Link href="/">
+                <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-6 py-2 text-sm font-medium">
+                  Start Building
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

@@ -64,7 +64,7 @@ Preferred communication style: Simple, everyday language.
 - **Output**: Clean HTML with Tailwind CSS classes, no JavaScript
 
 ### UI Designer Interface
-- **Trust Banner**: Top banner showing community metrics (30+ developers, 2.8k views, 150+ likes, 30+ projects) to build credibility
+- **Trust Banner**: Top banner with "More projects dropping soon" message and "Start Building" CTA to encourage user engagement
 - **Navigation**: Professional navigation bar with AI UI Designer branding and route switching (Home, API Guide, Collaborate, About)
 - **Input Panel**: 4-tab interface with Showcase (default), Gallery, Quick Templates, and Modern sections
 - **The Showcase Tab**: Professional project showcase featuring amazing AI-built projects with:
