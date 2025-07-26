@@ -37,12 +37,16 @@ export type InsertGeneration = z.infer<typeof insertGenerationSchema>;
 export const generateUISchema = z.object({
   prompt: z.string().min(10, "Prompt must be at least 10 characters"),
   model: z.enum([
-    "gpt-4o", 
-    "gpt-3.5-turbo", 
-    "claude-sonnet-4-20250514", 
-    "claude-3-7-sonnet-20250219",
-    "grok-2-1212",
-    "grok-2-vision-1212"
+    // OpenAI
+    "gpt-4o", "gpt-4-turbo", "gpt-3.5-turbo",
+    // Anthropic
+    "claude-sonnet-4-20250514", "claude-3-5-sonnet", "claude-3-opus", "claude-3-haiku",
+    // Google
+    "gemini-1.5-pro", "gemini-1.5-flash", "gemini-2.0", "gemini-2.5-flash",
+    // xAI
+    "grok-2-1212", "grok-2-vision-1212", "grok-1",
+    // Cohere
+    "command-r", "command-r-plus"
   ]).default("gpt-4o"),
   responsive: z.boolean().default(true),
 });

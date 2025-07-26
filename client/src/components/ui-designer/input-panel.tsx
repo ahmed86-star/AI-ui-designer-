@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Edit3, Lightbulb, Trash2, Wand2, Loader2, Sparkles, Palette } from "lucide-react";
 import TemplateShowcase from "./template-showcase";
+import ShowcaseGallery from "./showcase-gallery";
 import type { GenerateUIRequest, GenerateUIResponse } from "@shared/schema";
 
 interface InputPanelProps {
@@ -151,17 +152,28 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
 
       {/* Templates Section */}
       <div className="border-b border-slate-700/50">
-        <Tabs defaultValue="showcase" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 glass border-slate-600/50">
-            <TabsTrigger value="quick" className="flex items-center space-x-2 data-[state=active]:bg-slate-700/50 transition-all duration-300">
+        <Tabs defaultValue="gallery" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 glass border-slate-600/50">
+            <TabsTrigger value="gallery" className="flex items-center space-x-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 transition-all duration-300">
+              <Palette className="w-3 h-3" />
+              <span className="text-xs">Gallery</span>
+            </TabsTrigger>
+            <TabsTrigger value="quick" className="flex items-center space-x-1 data-[state=active]:bg-slate-700/50 transition-all duration-300">
               <Lightbulb className="w-3 h-3" />
               <span className="text-xs">Quick</span>
             </TabsTrigger>
-            <TabsTrigger value="showcase" className="flex items-center space-x-2 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 transition-all duration-300">
+            <TabsTrigger value="showcase" className="flex items-center space-x-1 data-[state=active]:bg-slate-700/50 transition-all duration-300">
               <Sparkles className="w-3 h-3" />
               <span className="text-xs">Modern</span>
             </TabsTrigger>
           </TabsList>
+          
+          <TabsContent value="gallery" className="p-4 mt-0 max-h-80 overflow-y-auto">
+            <ShowcaseGallery 
+              onSelectTemplate={(prompt) => setPrompt(prompt)} 
+              isGenerating={isGenerating} 
+            />
+          </TabsContent>
           
           <TabsContent value="quick" className="p-4 mt-0">
         <div className="space-y-3">
@@ -369,17 +381,36 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label className="text-sm text-slate-300 font-medium">AI Model</Label>
-              <Select value={model} onValueChange={(value: "gpt-4o" | "gpt-3.5-turbo" | "claude-sonnet-4-20250514" | "claude-3-7-sonnet-20250219" | "grok-2-1212" | "grok-2-vision-1212") => setModel(value)} disabled={isGenerating}>
+              <Select value={model} onValueChange={setModel} disabled={isGenerating}>
                 <SelectTrigger className="glass border-slate-600/50 text-slate-50 bg-transparent">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="glass border-slate-600/50">
-                  <SelectItem value="gpt-4o">GPT-4o ⚡</SelectItem>
+                <SelectContent className="glass border-slate-600/50 max-h-64 overflow-y-auto">
+                  {/* OpenAI Models */}
+                  <SelectItem value="gpt-4o">GPT-4o ⚡ (Multimodal)</SelectItem>
+                  <SelectItem value="gpt-4-turbo">GPT-4 Turbo 🚀</SelectItem>
                   <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
+                  
+                  {/* Anthropic Models */}
                   <SelectItem value="claude-sonnet-4-20250514">Claude 4.0 Sonnet 🧠</SelectItem>
-                  <SelectItem value="claude-3-7-sonnet-20250219">Claude 3.7 Sonnet</SelectItem>
+                  <SelectItem value="claude-3-5-sonnet">Claude 3.5 Sonnet ⭐</SelectItem>
+                  <SelectItem value="claude-3-opus">Claude 3 Opus 💎</SelectItem>
+                  <SelectItem value="claude-3-haiku">Claude 3 Haiku ⚡</SelectItem>
+                  
+                  {/* Google Models */}
+                  <SelectItem value="gemini-1.5-pro">Gemini 1.5 Pro 🌟</SelectItem>
+                  <SelectItem value="gemini-1.5-flash">Gemini 1.5 Flash ⚡</SelectItem>
+                  <SelectItem value="gemini-2.0">Gemini 2.0 🔥</SelectItem>
+                  <SelectItem value="gemini-2.5-flash">Gemini 2.5 Flash 🚀</SelectItem>
+                  
+                  {/* xAI Models */}
                   <SelectItem value="grok-2-1212">Grok 2.0 🤖</SelectItem>
                   <SelectItem value="grok-2-vision-1212">Grok 2.0 Vision 👁️</SelectItem>
+                  <SelectItem value="grok-1">Grok 1 (Open) 🌐</SelectItem>
+                  
+                  {/* Cohere Models */}
+                  <SelectItem value="command-r">Command-R 🎯</SelectItem>
+                  <SelectItem value="command-r-plus">Command-R+ ⭐</SelectItem>
                 </SelectContent>
               </Select>
             </div>
