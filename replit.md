@@ -41,10 +41,14 @@ Preferred communication style: Simple, everyday language.
 - **Output**: Clean HTML with Tailwind CSS classes, no JavaScript
 
 ### UI Designer Interface
-- **Input Panel**: Prompt textarea, multi-AI model selection, responsive toggle, extensive template library
-- **Template Library**: 10+ pre-built templates including Landing Page, Dashboard, Blog, E-commerce, Portfolio, Restaurant, Fitness, Startup, Social Media, and Education
+- **Input Panel**: Dual-tab interface with Quick Templates and Modern Showcase sections
+- **Modern Template Library**: 15+ animated templates with gradient designs, glassmorphism effects, and motion
+  - **Modern & Animated**: Modern Landing, Neon Dashboard, Glass Blog, Motion E-commerce
+  - **Business & Tech**: SaaS Landing, Dashboard, Startup, Crypto Platform, AI Service, Education
+  - **Lifestyle & Creative**: Animated Portfolio, Restaurant, Fitness, Social Media, Creative Agency
+- **Enhanced Animations**: Custom CSS animations including float, glow, fadeInUp, slideIn effects, gradient transitions
+- **Template Showcase**: Interactive preview cards with gradient backgrounds and animated icons
 - **Preview Panel**: Live HTML preview with responsive breakpoint testing (desktop/tablet/mobile)
-- **Settings Modal**: Multi-provider API key configuration, default preferences, auto-save options
 - **Code Export**: HTML download, React component export, and copy functionality
 
 ### Component System

@@ -5,9 +5,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Edit3, Lightbulb, Trash2, Wand2, Loader2 } from "lucide-react";
+import { Edit3, Lightbulb, Trash2, Wand2, Loader2, Sparkles, Palette } from "lucide-react";
+import TemplateShowcase from "./template-showcase";
 import type { GenerateUIRequest, GenerateUIResponse } from "@shared/schema";
 
 interface InputPanelProps {
@@ -17,16 +19,41 @@ interface InputPanelProps {
 }
 
 const templates = {
-  landing: "Create a modern landing page for a SaaS product with a hero section featuring a headline, subtitle, and call-to-action button. Include a features section with 3 columns and a pricing section.",
-  dashboard: "Design a clean dashboard interface with a sidebar navigation containing menu items like Dashboard, Analytics, Users, and Settings. Include a main content area with stat cards and a data table.",
-  blog: "Create a blog homepage with a header containing navigation and logo, a featured post section, and a grid of recent blog posts with thumbnail images, titles, and excerpts.",
-  ecommerce: "Design an e-commerce product page with a large product image gallery on the left and product details on the right including title, price, description, and add to cart button.",
-  portfolio: "Create a personal portfolio website with a hero section featuring name and profession, an about section, skills showcase with progress bars, and a project gallery with hover effects.",
-  restaurant: "Design a restaurant website with a header featuring the restaurant name and navigation, hero section with food imagery, menu section with categories, and contact information with location map.",
-  fitness: "Create a fitness gym website with a bold hero section promoting memberships, class schedule section, trainer profiles with photos, and membership pricing plans.",
-  startup: "Design a modern startup website with animated hero section, problem-solution sections, team member cards, investor logos, and a newsletter signup form.",
-  social: "Create a social media app interface with a news feed layout, post cards with user avatars, like and comment buttons, trending topics sidebar, and user profile sections.",
-  education: "Design an online learning platform with course cards, instructor profiles, progress tracking elements, video player interface, and student dashboard layout."
+  // Modern & Animated Templates
+  modernLanding: "Create a stunning modern landing page with gradient backgrounds, glassmorphism cards, animated hero text with typewriter effect, floating particles in the background, smooth scroll animations, parallax sections, and interactive hover effects on buttons and cards.",
+  
+  neonDashboard: "Design a futuristic dashboard with dark theme, neon accents, glowing borders, animated data visualizations, pulsing notification badges, slide-in sidebar with smooth transitions, and cyber-punk style cards with hover glow effects.",
+  
+  glassBlog: "Create a modern blog with glassmorphism design, blurred backgrounds, floating cards with subtle shadows, animated blog post previews that scale on hover, smooth page transitions, and elegant typography with fade-in animations.",
+  
+  motionEcommerce: "Design an e-commerce site with product cards that flip on hover, smooth image carousels, animated shopping cart icon, floating action buttons, parallax product showcases, and interactive size/color selectors with smooth transitions.",
+  
+  animatedPortfolio: "Create a portfolio with animated skill bars, projects that slide in from different directions, smooth scroll reveal animations, interactive timeline, floating social media icons, and dynamic background patterns that respond to mouse movement.",
+  
+  // Business & Professional
+  landing: "Create a professional SaaS landing page with clean hero section, feature highlights, customer testimonials with rotating carousel, pricing tiers with hover effects, and call-to-action buttons with subtle animations.",
+  
+  dashboard: "Design a clean business dashboard with sidebar navigation, real-time data cards with animated counters, interactive charts, notification center, and user profile dropdown with smooth animations.",
+  
+  startup: "Create a modern startup website with bold hero section, problem-solution showcase, animated team member cards, investor logo carousel, and newsletter signup with success animations.",
+  
+  // Lifestyle & Creative
+  restaurant: "Design an elegant restaurant website with hero video background, animated menu sections, chef spotlight with image hover effects, reservation form with smooth validation, and location map with custom markers.",
+  
+  fitness: "Create a dynamic fitness website with energetic hero section, class schedule grid with hover effects, trainer profiles with social links, membership pricing cards with animated benefits, and progress tracking elements.",
+  
+  // Tech & Innovation
+  crypto: "Design a cryptocurrency platform with dark theme, real-time price tickers with color animations, trading interface with smooth charts, wallet cards with balance animations, and security features showcase.",
+  
+  ai: "Create an AI service website with futuristic design, animated neural network background, feature cards with flip animations, interactive demo sections, and pricing plans with gradient overlays.",
+  
+  // Social & Community
+  social: "Design a social media platform with news feed, animated post interactions, story circles with gradient borders, user profile cards with hover effects, and real-time messaging interface.",
+  
+  education: "Create an online learning platform with course cards featuring progress rings, instructor profiles with rating animations, video player interface, achievement badges, and interactive lesson navigation.",
+  
+  // Creative & Artistic
+  creative: "Design a creative agency website with split-screen layouts, animated project showcases, team member cards with creative hover effects, client logo animations, and contact form with artistic flourishes."
 };
 
 export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }: InputPanelProps) {
@@ -117,104 +144,196 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
         </div>
       </div>
 
-      {/* Prompt Templates */}
-      <div className="p-4 border-b border-dev-border">
-        <div className="flex items-center space-x-2 mb-3">
-          <Lightbulb className="w-4 h-4 text-yellow-500" />
-          <span className="text-sm font-medium text-slate-300">Quick Templates</span>
+      {/* Templates Section */}
+      <div className="border-b border-dev-border">
+        <Tabs defaultValue="quick" className="w-full">
+          <TabsList className="grid w-full grid-cols-2 bg-dev-border">
+            <TabsTrigger value="quick" className="flex items-center space-x-2 data-[state=active]:bg-dev-accent">
+              <Lightbulb className="w-3 h-3" />
+              <span className="text-xs">Quick</span>
+            </TabsTrigger>
+            <TabsTrigger value="showcase" className="flex items-center space-x-2 data-[state=active]:bg-purple-500">
+              <Sparkles className="w-3 h-3" />
+              <span className="text-xs">Modern</span>
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="quick" className="p-4 mt-0">
+        <div className="space-y-3">
+          {/* Modern & Animated Section */}
+          <div>
+            <h4 className="text-xs font-medium text-purple-400 mb-2 flex items-center">
+              <span className="w-2 h-2 bg-purple-400 rounded-full mr-2 animate-pulse"></span>
+              Modern & Animated
+            </h4>
+            <div className="grid grid-cols-2 gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("modernLanding")}
+                disabled={isGenerating}
+                className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 border-purple-500/30 text-sm text-purple-300"
+              >
+                ✨ Modern Landing
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("neonDashboard")}
+                disabled={isGenerating}
+                className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 hover:from-cyan-500/20 hover:to-blue-500/20 border-cyan-500/30 text-sm text-cyan-300"
+              >
+                🚀 Neon Dashboard
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("glassBlog")}
+                disabled={isGenerating}
+                className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 hover:from-emerald-500/20 hover:to-teal-500/20 border-emerald-500/30 text-sm text-emerald-300"
+              >
+                💎 Glass Blog
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("motionEcommerce")}
+                disabled={isGenerating}
+                className="bg-gradient-to-r from-orange-500/10 to-red-500/10 hover:from-orange-500/20 hover:to-red-500/20 border-orange-500/30 text-sm text-orange-300"
+              >
+                🛍️ Motion Shop
+              </Button>
+            </div>
+          </div>
+
+          {/* Business & Tech Section */}
+          <div>
+            <h4 className="text-xs font-medium text-blue-400 mb-2 flex items-center">
+              <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
+              Business & Tech
+            </h4>
+            <div className="grid grid-cols-3 gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("landing")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                SaaS Landing
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("dashboard")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Dashboard
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("startup")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Startup
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("crypto")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Crypto
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("ai")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                AI Service
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("education")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Education
+              </Button>
+            </div>
+          </div>
+
+          {/* Lifestyle & Creative Section */}
+          <div>
+            <h4 className="text-xs font-medium text-green-400 mb-2 flex items-center">
+              <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+              Lifestyle & Creative
+            </h4>
+            <div className="grid grid-cols-3 gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("animatedPortfolio")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Portfolio
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("restaurant")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Restaurant
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("fitness")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Fitness
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("social")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Social
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => useTemplate("creative")}
+                disabled={isGenerating}
+                className="bg-dev-border hover:bg-slate-600 border-dev-border text-xs"
+              >
+                Creative
+              </Button>
+            </div>
+          </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("landing")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Landing Page
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("dashboard")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Dashboard
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("blog")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Blog
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("ecommerce")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            E-commerce
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("portfolio")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Portfolio
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("restaurant")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Restaurant
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("fitness")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Fitness
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("startup")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Startup
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("social")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Social Media
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => useTemplate("education")}
-            disabled={isGenerating}
-            className="bg-dev-border hover:bg-slate-600 border-dev-border text-sm"
-          >
-            Education
-          </Button>
-        </div>
+          </TabsContent>
+          
+          <TabsContent value="showcase" className="p-4 mt-0">
+            <TemplateShowcase 
+              onSelectTemplate={useTemplate} 
+              isGenerating={isGenerating} 
+            />
+          </TabsContent>
+        </Tabs>
       </div>
 
       {/* Prompt Input Area */}
@@ -226,11 +345,14 @@ export default function InputPanel({ onGenerate, isGenerating, setIsGenerating }
           className="w-full h-full bg-dev-bg border-dev-border text-slate-50 placeholder-slate-400 resize-none focus:ring-dev-accent focus:border-dev-accent"
           placeholder="Describe the UI you want to create...
 
-Examples:
-• A modern landing page for a SaaS product with hero section, features, and pricing
-• A clean dashboard with sidebar navigation and data cards
-• A blog homepage with featured posts and category filters
-• An e-commerce product page with image gallery and reviews"
+🎨 Modern Examples:
+• A futuristic dashboard with neon accents and glowing data visualizations
+• A glassmorphism landing page with floating particles and smooth animations  
+• An e-commerce site with product cards that flip on hover and animated cart
+• A portfolio with animated skill bars and projects sliding in from different directions
+• A crypto platform with real-time price tickers and animated balance cards
+
+✨ Include motion keywords: animated, hover effects, transitions, parallax, glassmorphism, gradients, floating, pulsing, glowing"
         />
       </div>
 

@@ -37,24 +37,51 @@ export interface GenerateUIOptions {
 export async function generateUI(options: GenerateUIOptions): Promise<string> {
   const { prompt, model, responsive } = options;
 
-  const systemPrompt = `You are an expert frontend developer specializing in modern web design and Tailwind CSS.
+  const systemPrompt = `You are an expert frontend developer specializing in modern web design, animations, and Tailwind CSS.
 
-Your task is to generate clean, production-ready HTML code based on user descriptions. Follow these guidelines:
+Your task is to generate stunning, production-ready HTML code with modern design patterns. Follow these guidelines:
 
-1. Use only HTML and Tailwind CSS classes
-2. Make the design modern, clean, and professional
-3. ${responsive ? "Ensure the design is fully responsive using Tailwind's responsive prefixes" : "Focus on desktop layout"}
-4. Use semantic HTML elements
-5. Include proper accessibility attributes
-6. Use a consistent color palette and spacing
-7. Return ONLY the HTML content that goes inside the <body> tag
-8. Do not include <html>, <head>, or <body> tags
-9. Do not include any <script> tags or JavaScript
-10. Use Tailwind's utility classes extensively
-11. Make sure all interactive elements have proper hover states
-12. Use appropriate spacing, typography, and layout classes
+DESIGN PRINCIPLES:
+1. Create visually striking, modern designs with depth and visual interest
+2. Use gradients, glassmorphism, and modern color palettes
+3. Include smooth animations and hover effects using Tailwind classes
+4. ${responsive ? "Ensure fully responsive design with mobile-first approach" : "Focus on desktop layout"}
+5. Use semantic HTML with proper accessibility attributes
 
-The generated HTML should be immediately usable and look professional.`;
+MODERN VISUAL ELEMENTS:
+- Gradients: bg-gradient-to-r, bg-gradient-to-br, from-color-500, to-color-600
+- Glassmorphism: backdrop-blur-sm, bg-white/10, border border-white/20
+- Shadows: shadow-xl, shadow-2xl, drop-shadow-lg
+- Rounded corners: rounded-xl, rounded-2xl
+- Animation classes: animate-pulse, animate-bounce, animate-fade-in
+- Hover effects: hover:scale-105, hover:shadow-2xl, hover:bg-gradient-to-r
+- Transitions: transition-all, duration-300, ease-in-out
+
+INTERACTIVE ELEMENTS:
+- Buttons with gradient backgrounds and hover transformations
+- Cards that lift on hover with shadow increases
+- Smooth color transitions and scale effects
+- Loading states with pulse animations
+- Interactive icons and badges
+
+LAYOUT & SPACING:
+- Use modern spacing: space-y-8, gap-6, p-8
+- Grid layouts: grid-cols-1 md:grid-cols-2 lg:grid-cols-3
+- Flexbox: flex, items-center, justify-between
+- Container classes: max-w-7xl, mx-auto
+
+TYPOGRAPHY:
+- Modern font weights: font-light, font-medium, font-bold
+- Text sizes: text-sm, text-lg, text-4xl, text-6xl
+- Text colors with opacity: text-gray-600, text-white/90
+
+RETURN FORMAT:
+- Return ONLY the HTML content for inside <body> tags
+- No <html>, <head>, <body>, or <script> tags
+- Use only Tailwind CSS utility classes
+- Create engaging, modern designs that feel premium and interactive
+
+The generated HTML should be visually stunning and feel like a modern, professional application.`;
 
   const userPrompt = `Create a web interface based on this description: ${prompt}
 
