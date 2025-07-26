@@ -1,0 +1,176 @@
+# AI LAB
+
+---
+
+## **📘 Abdirahman’s LLM API Starter Guide 💻✨**
+
+> 🧠 “LLMs (Large Language Models) give you powerful AI superpowers — from chatbots to full app automation. Let’s explore how to tap into them using APIs.”
+> 
+
+> No experience? No problem.
+> 
+
+---
+
+### **🧰 1. What You’ll Need**
+
+| **Requirement** | **Details** |
+| --- | --- |
+| ✅ **Email Account** | Use Gmail, Outlook, etc. |
+| ✅ **Credit/Debit Card** | Some APIs require payment info, even for free tiers |
+| ✅ **Basic knowledge of REST APIs** | Don’t worry — it’s mostly POST and JSON! |
+| ✅ **API platform** (Postman, Curl, Python, etc.) | Optional but helpful for testing |
+
+---
+
+### **🔑 2. API Access: Where to Go for Each LLM**
+
+---
+
+### **🧠**
+
+### **OpenAI GPT-4o / GPT-4 Turbo**
+
+- 🔗 **Website:** [https://platform.openai.com](https://platform.openai.com/)
+- 📋 **Steps:**
+    1. Sign in and go to the [API Keys page](https://platform.openai.com/account/api-keys)
+    2. Copy your secret key 🔐
+    3. Use it in headers like:
+
+```
+curl https://api.openai.com/v1/chat/completions \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "model": "gpt-4o",
+  "messages": [{"role": "user", "content": "Hello!"}]
+}'
+```
+
+- 
+    1. 
+    2. Explore playground at: https://platform.openai.com/playground
+
+---
+
+### **🤖**
+
+### **Anthropic Claude 3 (Opus, Sonnet, Haiku)**
+
+- 🔗 **Website:** [https://www.anthropic.com](https://www.anthropic.com/)
+- 📋 **Steps:**
+    1. Join at [console.anthropic.com](https://console.anthropic.com/)
+    2. Go to API Keys and create a key
+    3. Use endpoint like:
+
+```
+curl https://api.anthropic.com/v1/messages \
+-H "x-api-key: YOUR_API_KEY" \
+-H "anthropic-version: 2023-06-01" \
+-H "content-type: application/json" \
+-d '{
+  "model": "claude-3-sonnet-20240229",
+  "messages": [{"role": "user", "content": "Summarize a PDF"}],
+  "max_tokens": 500
+}'
+```
+
+---
+
+### **🧠**
+
+### **Google Gemini (2.5, 1.5 Pro, Flash)**
+
+- 🔗 **Website:** [https://makersuite.google.com](https://makersuite.google.com/) or [Google AI Studio](https://ai.google.dev/)
+- 📋 **Steps:**
+    1. Sign in with Google → Go to AI Studio
+    2. Try it live in browser or get your key from Google Cloud Console
+    3. Use Gemini API:
+
+```
+curl -X POST \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent \
+-d '{"contents":[{"parts":[{"text":"Explain quantum computing"}]}]}'
+```
+
+---
+
+### **🚀**
+
+### **Mistral (Open-Source, e.g. Mistral-7B, Mixtral)**
+
+- 🔗 **Website:** [https://mistral.ai](https://mistral.ai/) (no hosted API yet)
+- 🆓 **Try using**:
+    - **OpenRouter**: [https://openrouter.ai](https://openrouter.ai/)
+    - **Replicate**: https://replicate.com/mistralai
+- 📋 **OpenRouter Example**:
+
+```
+curl https://openrouter.ai/api/v1/chat/completions \
+-H "Authorization: Bearer YOUR_OPENROUTER_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "model": "mistral/mixtral-8x7b",
+  "messages": [{"role": "user", "content": "Give me startup ideas"}]
+}'
+```
+
+---
+
+### **🐍**
+
+### **DeepSeek, Qwen, Yi, etc. (Open Source via Hugging Face)**
+
+- 🔗 **Website:** [https://huggingface.co](https://huggingface.co/)
+- 📋 **Steps:**
+    1. Create a free account on Hugging Face
+    2. Go to “Access Tokens” → Generate a token
+    3. Use transformers (Python):
+
+```
+from transformers import AutoModelForCausalLM, AutoTokenizer
+model = AutoModelForCausalLM.from_pretrained("deepseek-ai/deepseek-coder-6.7b-instruct")
+tokenizer = AutoTokenizer.from_pretrained("deepseek-ai/deepseek-coder-6.7b-instruct")
+inputs = tokenizer("Explain LLMs", return_tensors="pt")
+outputs = model.generate(**inputs, max_new_tokens=100)
+print(tokenizer.decode(outputs[0]))
+```
+
+---
+
+### **🌐**
+
+### **Universal API Gateway Options**
+
+Use these to access **multiple LLMs from one place**:
+
+- 🔁 **OpenRouter** → [https://openrouter.ai](https://openrouter.ai/)
+- 🔀 **Fireworks.ai** → [https://fireworks.ai](https://fireworks.ai/)
+- ⚡ **Groq** (for ultra-fast inference) → [https://console.groq.com](https://console.groq.com/)
+- 🧩 **Together.ai** → [https://together.ai](https://together.ai/)
+
+---
+
+### **💡 Bonus Tips for Abdirahman 🚀**
+
+✅ **Start in Playground Mode**
+
+→ Always test your prompts in a web UI first before building code.
+
+✅ **Use Free Tiers First**
+
+→ GPT-4o, Claude, Gemini, OpenRouter all offer generous free tokens monthly.
+
+✅ **Keep Your API Key Safe** 🔒
+
+→ Never share your keys or commit them to GitHub!
+
+✅ **Explore SDKs**
+
+→ Use openai, anthropic, or google-generativeai Python SDKs to simplify requests.
+
+✅ **Log Everything**
+
+→ Save prompt + response for debugging and learning.
