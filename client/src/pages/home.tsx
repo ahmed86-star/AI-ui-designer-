@@ -2,13 +2,12 @@ import { useState } from "react";
 import InputPanel from "../components/ui-designer/input-panel";
 import PreviewPanel from "../components/ui-designer/preview-panel";
 import SettingsModal from "../components/ui-designer/settings-modal";
-import TrustSection from "../components/trust-section";
-import { Wand2, Settings, BookOpen, BarChart3, ChevronDown, ChevronUp } from "lucide-react";
+import { Wand2, Settings, BookOpen, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
-  const [showTrustSection, setShowTrustSection] = useState(false);
+
   const [generatedHTML, setGeneratedHTML] = useState<string>("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationCount, setGenerationCount] = useState(0);
@@ -99,30 +98,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Trust Section Toggle */}
-      <div className="relative z-10 border-t border-slate-700/50 backdrop-blur-xl bg-slate-900/30">
-        <div className="container mx-auto px-6">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setShowTrustSection(!showTrustSection)}
-            className="w-full py-2 text-slate-400 hover:text-slate-300 transition-colors"
-          >
-            <span className="text-sm">Why developers trust us</span>
-            {showTrustSection ? (
-              <ChevronUp className="w-4 h-4 ml-2" />
-            ) : (
-              <ChevronDown className="w-4 h-4 ml-2" />
-            )}
-          </Button>
-          
-          {showTrustSection && (
-            <div className="py-6 animate-fadeInUp">
-              <TrustSection />
-            </div>
-          )}
-        </div>
-      </div>
+
 
       {/* Settings Modal */}
       <SettingsModal
